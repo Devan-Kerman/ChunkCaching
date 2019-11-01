@@ -9,8 +9,9 @@ public interface ChunkCache2D<C> extends Iterable<C> {
 	 * tells the cache to unload the chunk, does not guarantee it will be saved in persistent data
 	 * @param x the x coordinate of the chunk
 	 * @param y the y coordinate of the chunk
+	 * @return the chunk previously associated with the position
 	 */
-	void unload(int x, int y);
+	C unload(int x, int y);
 
 	/**
 	 * sets the chunk at the given coordinates, if the cache has priority, the chunk will be moved to the top priority

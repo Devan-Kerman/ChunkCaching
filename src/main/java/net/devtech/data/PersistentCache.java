@@ -1,4 +1,4 @@
-package net.devtech;
+package net.devtech.data;
 
 /**
  * represents a cache that has persistent storage
@@ -8,12 +8,10 @@ public interface PersistentCache<C> {
 	/**
 	 * forcefully save the chunk to persistent storage regardless of priority, call this when the program is shutting down
 	 * if the chunk hasn't been supplied yet, create a new one and save it
-	 * @param unload whether or not the chunks should be unloaded as well
 	 */
-	void save(C chunk, boolean unload);
+	C save(int x, int y, boolean remove) throws Exception;
 	/**
 	 * save all the chunks
-	 * @param unload
 	 */
-	void saveAll(C chunk, boolean unload);
+	void saveAll(boolean remove) throws Exception;
 }

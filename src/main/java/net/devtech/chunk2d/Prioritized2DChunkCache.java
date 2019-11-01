@@ -8,18 +8,12 @@ package net.devtech.chunk2d;
  */
 public interface Prioritized2DChunkCache<C, P> extends ChunkCache2D<C> {
 	/**
-	 * gets the chunk without changing its priority
+	 * gets the chunk without changing its priority, or load the chunk into the unloaded cache if it has not been created
 	 * @param x the x coordinate of the chunk
 	 * @param y the y coordinate of the chunk
 	 * @return the chunk at the coordinates or null if none was cached or provided
 	 */
 	C getNoPriority(int x, int y);
-
-	/**
-	 * caches the chunk, but does not "load it" it will remain in the lower priorities of the chunk
-	 * @return the currently unloaded chunk
-	 */
-	C preGen(int x, int y);
 
 	/**
 	 * gets the priority of the chunk at the given location
@@ -33,6 +27,7 @@ public interface Prioritized2DChunkCache<C, P> extends ChunkCache2D<C> {
 	 * sets the priority of a chunk, does not have to be already generated
 	 * @param x the x coordinate
 	 * @param y the y coordinate
+	 * @param priority the priority to set the chunk
 	 */
-	void setPriority(int x, int y);
+	void setPriority(int x, int y, P priority);
 }
