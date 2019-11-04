@@ -25,4 +25,18 @@ public interface Located2D {
 	default Point getLocation() {
 		return new Point(getX(), getY());
 	}
+
+	static Located2D of(Point point) {
+		return new Located2D() {
+			@Override
+			public int getX() {
+				return point.x;
+			}
+
+			@Override
+			public int getY() {
+				return point.y;
+			}
+		};
+	}
 }

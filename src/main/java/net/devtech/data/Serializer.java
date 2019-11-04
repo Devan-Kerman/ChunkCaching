@@ -1,6 +1,7 @@
 package net.devtech.data;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.function.Function;
 
@@ -16,14 +17,14 @@ public interface Serializer<C, S extends OutputStream> {
 	 * @param chunk the chunk
 	 * @param output the output
 	 */
-	default void serialize(C chunk, OutputStream output) {
+	default void serialize(C chunk, OutputStream output) throws IOException {
 		write(chunk, newStream(output));
 	}
 
 	/**
 	 * do not call this method, only implement it
 	 */
-	void write(C chunk, S output);
+	void write(C chunk, S output) throws IOException;
 
 	/**
 	 * creates an new stream that writes to the given output stream
@@ -37,7 +38,7 @@ public interface Serializer<C, S extends OutputStream> {
 	 * @param chunk the chunk
 	 * @return a newly allocated and populated byte array
 	 */
-	default byte[] serialize(C chunk) {
+	default byte[] serialize(C chunk) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		serialize(chunk, newStream(out));
 		return out.toByteArray();

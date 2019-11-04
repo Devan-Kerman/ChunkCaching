@@ -1,6 +1,7 @@
 package net.devtech.data;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -16,9 +17,9 @@ public interface Deserializer<C, S extends InputStream, A> {
 	 * @param args extra information that the chunk needs to initialize
 	 * @return a new chunk read from the output stream
 	 */
-	C read(S stream, A args);
+	C read(S stream, A args) throws IOException;
 
-	default C deserialize(InputStream inputStream, A args) {
+	default C deserialize(InputStream inputStream, A args) throws IOException {
 		return read(newStream(inputStream), args);
 	}
 
@@ -29,7 +30,7 @@ public interface Deserializer<C, S extends InputStream, A> {
 	 */
 	S newStream(InputStream stream);
 
-	default C read(byte[] input, A args) {
+	default C read(byte[] input, A args) throws IOException {
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(input);
 		return read(newStream(inputStream), args);
 	}

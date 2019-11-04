@@ -1,6 +1,7 @@
 package net.devtech.util;
 
 public class Tracker<C> {
+	public static final Tracker<?> EMPTY = new Tracker<>(null);
 	private int accesses;
 	private C objects;
 
